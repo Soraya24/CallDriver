@@ -8,7 +8,11 @@ public class MyConstant {
 
 
     private String urlGetCall = "http://woodriverservice.com/Android/getCall.php";
+    private String[] loginStrings = new String[]{"id", "Name", "User", "Password"};
 
+    public String[] getLoginStrings() {
+        return loginStrings;
+    }
 
     public String getUrlGetCall() {
         return urlGetCall;

@@ -9,6 +9,7 @@
     <string name="massage_UserFalse">No This User In My Database</string>
     <string name="title_PasswordFalse">Password False</string>
     <string name="massage_PasswordFalse">Please Try Again Password False</string>
+    <string name="name">Name :</string>
 
 
 </resources>
