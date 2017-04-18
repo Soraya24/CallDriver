@@ -59,12 +59,10 @@ public class ServiceActivity extends ListActivity {
             JSONArray jsonArray = new JSONArray(strJSON);
             listview_names = new String[jsonArray.length()];
 
-            for (int i=0;i<jsonArray.length();i++) {
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 listview_names[i] = jsonObject.getString(columnPassengerStrings[2]);
             }   // for
-
-
 
 
             array_sort = new ArrayList<String>(Arrays.asList(listview_names));
@@ -122,7 +120,7 @@ public class ServiceActivity extends ListActivity {
                                         View arg1, int position, long arg3) {
                     Toast.makeText(getApplicationContext(), array_sort.get(position),
                             Toast.LENGTH_SHORT).show();
-                    findDetailShop(array_sort.get(position));
+                    findDetailPhone(array_sort.get(position));
                 }
             });
 
@@ -134,30 +132,27 @@ public class ServiceActivity extends ListActivity {
 
     }   // Main Method
 
-    private void findDetailShop(String nameShop) {
+    private void findDetailPhone(String strPhone) {
 
         try {
 
-//            SynShopData synShopData = new SynShopData(SearchShop.this);
-//            synShopData.execute(nameShop);
-//            String strResult = synShopData.get();
-//            Log.d("12decV2", "strResult ==> " + strResult);
-//
-//            JSONArray jsonArray = new JSONArray(strResult);
-//            String[] strings = new String[8];
-//            JSONObject jsonObject = jsonArray.getJSONObject(0);
-//            strings[0] = jsonObject.getString(MyManage.column_Shop);
-//            strings[1] = jsonObject.getString(MyManage.column_Address);
-//            strings[2] = jsonObject.getString(MyManage.column_Phone);
-//            strings[3] = jsonObject.getString(MyManage.column_Service);
-//            strings[4] = jsonObject.getString(MyManage.column_Image);
-//            strings[5] = jsonObject.getString(MyManage.column_Icon);
-//            strings[6] = jsonObject.getString(MyManage.column_Lat);
-//            strings[7] = jsonObject.getString(MyManage.column_Lng);
-//
-//            Intent intent = new Intent(SearchShop.this, DetailActivity.class);
-//            intent.putExtra("Shop", strings);
-//            startActivity(intent);
+            Log.d(tag, "strPhone ==> " + strPhone);
+
+            GetDataWhere getDataWhere = new GetDataWhere(ServiceActivity.this);
+            getDataWhere.execute(columnPassengerStrings[2], strPhone,
+                    myConstant.getUrlGetPassengerWherePhone());
+            String strJSON = getDataWhere.get();
+            Log.d(tag, "JSON where ==> " + strJSON);
+
+            String[] passengerStrings = new String[columnPassengerStrings.length];
+            JSONArray jsonArray = new JSONArray(strJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            for (int i=0;i<columnPassengerStrings.length;i++) {
+                passengerStrings[i] = jsonObject.getString(columnPassengerStrings[i]);
+                Log.d(tag, "passengerString(" + i + ") ==> " + passengerStrings[i]);
+            }   // for
+
+
 
         } catch (Exception e) {
             Log.d("12decV2", "e findDetail ==> " + e.toString());
