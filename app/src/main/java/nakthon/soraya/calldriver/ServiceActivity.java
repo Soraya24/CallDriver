@@ -147,11 +147,10 @@ public class ServiceActivity extends ListActivity {
             String[] passengerStrings = new String[columnPassengerStrings.length];
             JSONArray jsonArray = new JSONArray(strJSON);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            for (int i=0;i<columnPassengerStrings.length;i++) {
+            for (int i = 0; i < columnPassengerStrings.length; i++) {
                 passengerStrings[i] = jsonObject.getString(columnPassengerStrings[i]);
                 Log.d(tag, "passengerString(" + i + ") ==> " + passengerStrings[i]);
             }   // for
-
 
 
         } catch (Exception e) {
