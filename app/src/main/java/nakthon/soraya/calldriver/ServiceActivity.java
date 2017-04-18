@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,35 +26,43 @@ public class ServiceActivity extends ListActivity {
 
     private EditText et;
     private ListView lv;
-    private String[] listview_names = {"1234", "423", "12", "4231", "4123", "abcd",
-            "abc", "ab", "xyzzz",
-            "xy", "xxxx"};
+    //    private String[] listview_names = {"1234", "423", "12", "4231", "4123", "abcd",
+//            "abc", "ab", "xyzzz",
+//            "xy", "xxxx"};
+    private String[] listview_names;
 
     private ArrayList<String> array_sort;
     int textlength = 0;
 
+    private MyConstant myConstant;
+    private String[] columnPassengerStrings;
+    private String tag = "18AprilV2";
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
+
+        myConstant = new MyConstant();
+        columnPassengerStrings = myConstant.getPassengerColumnStrings();
 
         try {
 
             et = (EditText) findViewById(R.id.edtSearch);
             lv = (ListView) findViewById(android.R.id.list);
 
-//            MySynShop mySynShop = new MySynShop(SearchShop.this);
-//            mySynShop.execute();
-//            String strJSON = mySynShop.get();
-//
-//            JSONArray jsonArray = new JSONArray(strJSON);
-//            listview_names = new String[jsonArray.length()];
-//
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//
-//                JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                listview_names[i] = jsonObject.getString("Shop");
-//
-//            }   // for
+            //Get Data from passengerTABLE
+            GetAllData getAllData = new GetAllData(ServiceActivity.this);
+            getAllData.execute(myConstant.getUrlGetPassenger());
+            String strJSON = getAllData.get();
+            Log.d(tag, "JSON ==> " + strJSON);
+
+            JSONArray jsonArray = new JSONArray(strJSON);
+            listview_names = new String[jsonArray.length()];
+
+            for (int i=0;i<jsonArray.length();i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                listview_names[i] = jsonObject.getString(columnPassengerStrings[2]);
+            }   // for
 
 
 
