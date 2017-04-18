@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="my_layout1">400dp</dimen>
+    <dimen name="padding1">30dp</dimen>
+    <dimen name="h1">40sp</dimen>
+    <dimen name="h2">25sp</dimen>
+    <dimen name="icon">60dp</dimen>
+
+
+</resources>
