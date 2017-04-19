@@ -5,112 +5,164 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="@dimen/zero"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="@dimen/padding1">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/relbotton"
+                android:orientation="vertical"
+                android:padding="@dimen/padding1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/name"
-                    android:textSize="@dimen/h2"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/phone"
-                    android:textSize="@dimen/h2"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/padding1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/name"
-                    android:textSize="@dimen/h1" />
-
-                <TextView
-                    android:id="@+id/txtPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="12345678"
-                    android:textSize="@dimen/h1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/start"
-                    android:textSize="@dimen/h2"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/destination"
-                    android:textSize="@dimen/h2"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:orientation="horizontal">
 
-                <EditText
+                    <TextView
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/name"
+                        android:textSize="@dimen/h2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/phone"
+                        android:textSize="@dimen/h2"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_marginBottom="@dimen/padding1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/name"
+                        android:textSize="@dimen/h1" />
+
+                    <TextView
+                        android:id="@+id/txtPhone"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="12345678"
+                        android:textSize="@dimen/h1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/start"
+                        android:textSize="@dimen/h2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/destination"
+                        android:textSize="@dimen/h2"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtStart"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <EditText
+                        android:id="@+id/edtDestination"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ListView
+                        android:id="@+id/livStart"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <ListView
+                        android:id="@+id/livDestination"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/relbotton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="@dimen/padding1"
+                android:paddingLeft="@dimen/padding1">
+
+                <TextView
+                    android:id="@+id/txtDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date - Time"
+                    android:textSize="@dimen/h1" />
+
+                <ImageView
+                    android:id="@+id/imvDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/ic_test" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:padding="@dimen/padding1"
             android:layout_width="@dimen/zero"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/padding1">
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -124,7 +176,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </RelativeLayout>
