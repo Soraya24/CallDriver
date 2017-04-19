@@ -10,6 +10,7 @@
     <string name="title_PasswordFalse">Password False</string>
     <string name="massage_PasswordFalse">Please Try Again Password False</string>
     <string name="name">Name :</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
