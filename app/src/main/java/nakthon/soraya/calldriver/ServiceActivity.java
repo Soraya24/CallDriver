@@ -133,6 +133,7 @@ public class ServiceActivity extends ListActivity {
         }
     }
 
+
     private void setupConstant() {
         myConstant = new MyConstant();
         columnPassengerStrings = myConstant.getPassengerColumnStrings();
