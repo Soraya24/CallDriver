@@ -1,9 +1,10 @@
 package nakthon.soraya.calldriver;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,13 +14,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
     private String[] passengerStrings;
     private TextView nameTextView, phoneTextView;
-    private EditText startEditText, destinationEditText;
-    private ListView startListView, destinationListView;
+    private TextView startTextView, destinationTextView;
+    private ImageView startImageView, destinationImageView;
 
 
     @Override
@@ -39,7 +40,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Setup Fragment Map
         setupFragmentMap();
 
+        //Image Controller
+        imageController();
+
+
     }   // Main Method
+
+    private void imageController() {
+        startImageView.setOnClickListener(MapsActivity.this);
+        destinationImageView.setOnClickListener(MapsActivity.this);
+    }
 
     private void showView() {
         nameTextView.setText(passengerStrings[1]);
@@ -49,10 +59,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void initialView() {
         nameTextView = (TextView) findViewById(R.id.txtName);
         phoneTextView = (TextView) findViewById(R.id.txtPhone);
-        startEditText = (EditText) findViewById(R.id.edtStart);
-        destinationEditText = (EditText) findViewById(R.id.edtDestination);
-        startListView = (ListView) findViewById(R.id.livStart);
-        destinationListView = (ListView) findViewById(R.id.livDestination);
+        startTextView = (TextView) findViewById(R.id.edtStart);
+        destinationTextView = (TextView) findViewById(R.id.edtDestination);
+        startImageView = (ImageView) findViewById(R.id.imvStart);
+        destinationImageView = (ImageView) findViewById(R.id.imvDestination);
+
     }
 
     private void getValueFromIntent() {
@@ -75,4 +86,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }   // onMapReady
 
+    @Override
+    public void onClick(View view) {
+
+        if (view == startImageView) {
+            Intent intent = new Intent(MapsActivity.this, SearchLocationActivity.class);
+            intent.putExtra("Index", 0);
+            startActivity(intent);
+        }
+        if (view == destinationImageView) {
+            Intent intent = new Intent(MapsActivity.this, SearchLocationActivity.class);
+            intent.putExtra("Index", 1);
+            startActivity(intent);
+        }
+
+    }   // onClick
 }   // Main Class
