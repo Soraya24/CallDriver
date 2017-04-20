@@ -149,14 +149,14 @@ public class SearchLocationActivity extends ListActivity {
                     myConstant.getUrlGetLocationWhereName());
             String strJSON = getDataWhere.get();
             Log.d(tag, "JSON where ==> " + strJSON);
-//
-//            String[] passengerStrings = new String[columnLocationStrings.length];
-//            JSONArray jsonArray = new JSONArray(strJSON);
-//            JSONObject jsonObject = jsonArray.getJSONObject(0);
-//            for (int i = 0; i < columnLocationStrings.length; i++) {
-//                passengerStrings[i] = jsonObject.getString(columnLocationStrings[i]);
-//                Log.d(tag, "passengerString(" + i + ") ==> " + passengerStrings[i]);
-//            }   // for
+
+            String[] locationStrings = new String[columnLocationStrings.length];
+            JSONArray jsonArray = new JSONArray(strJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            for (int i = 0; i < columnLocationStrings.length; i++) {
+                locationStrings[i] = jsonObject.getString(columnLocationStrings[i]);
+                Log.d(tag, "locationString(" + i + ") ==> " + locationStrings[i]);
+            }   // for
 //
 //            //Intent to Map
 //            Intent intent = new Intent(SearchLocationActivity.this, MapsActivity.class);
