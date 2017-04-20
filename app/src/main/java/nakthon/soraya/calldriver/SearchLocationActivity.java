@@ -31,7 +31,7 @@ public class SearchLocationActivity extends ListActivity {
     private int textlength = 0;
     private MyConstant myConstant;
     private String[] columnLocationStrings;
-    private String tag = "18AprilV2";
+    private String tag = "20AprilV1";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,17 +138,17 @@ public class SearchLocationActivity extends ListActivity {
         columnLocationStrings = myConstant.getLocationColumnStrings();
     }
 
-    private void findDetailPhone(String strPhone) {
+    private void findDetailPhone(String strLocation) {
 
         try {
 
-//            Log.d(tag, "strPhone ==> " + strPhone);
-//
-//            GetDataWhere getDataWhere = new GetDataWhere(SearchLocationActivity.this);
-//            getDataWhere.execute(columnLocationStrings[2], strPhone,
-//                    myConstant.getUrlGetPassengerWherePhone());
-//            String strJSON = getDataWhere.get();
-//            Log.d(tag, "JSON where ==> " + strJSON);
+            Log.d(tag, "strLocation ==> " + strLocation);
+
+            GetDataWhere getDataWhere = new GetDataWhere(SearchLocationActivity.this);
+            getDataWhere.execute(columnLocationStrings[1], strLocation,
+                    myConstant.getUrlGetLocationWhereName());
+            String strJSON = getDataWhere.get();
+            Log.d(tag, "JSON where ==> " + strJSON);
 //
 //            String[] passengerStrings = new String[columnLocationStrings.length];
 //            JSONArray jsonArray = new JSONArray(strJSON);
@@ -164,7 +164,7 @@ public class SearchLocationActivity extends ListActivity {
 //            startActivity(intent);
 
         } catch (Exception e) {
-            Log.d("12decV2", "e findDetail ==> " + e.toString());
+            Log.d(tag, "e findDetail ==> " + e.toString());
         }
 
     }   // findDetail
