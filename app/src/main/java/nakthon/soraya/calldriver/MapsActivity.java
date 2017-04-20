@@ -87,14 +87,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        centerLatLng = new LatLng(13.668087, 100.622625);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 16));
+        createCenterMap(13.668087, 100.622625);
 
         createMarker();
 
 
 
     }   // onMapReady
+
+    private void createCenterMap(double lat, double lng) {
+        centerLatLng = new LatLng(lat, lng);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 16));
+    }
 
     private void createMarker() {
 
@@ -165,7 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startTextView.setText(resultStrings[1]);
                 startLatADouble = Double.parseDouble(resultStrings[2]);
                 startLngADouble = Double.parseDouble(resultStrings[3]);
-                
+                createCenterMap(startLatADouble, startLngADouble);
 
                 break;
             case 1001:
@@ -173,6 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 destinationTextView.setText(resultStrings[1]);
                 destinationLatADouble = Double.parseDouble(resultStrings[2]);
                 destinationLngADouble = Double.parseDouble(resultStrings[3]);
+                createCenterMap(destinationLatADouble, destinationLngADouble);
 
                 break;
         }
