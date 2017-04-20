@@ -25,16 +25,11 @@ import java.util.Arrays;
 
 public class ServiceActivity extends ListActivity {
 
-    private EditText et;
-    private ListView lv;
-    //    private String[] listview_names = {"1234", "423", "12", "4231", "4123", "abcd",
-//            "abc", "ab", "xyzzz",
-//            "xy", "xxxx"};
+    private EditText editText;
+    private ListView listView;
     private String[] listview_names;
-
     private ArrayList<String> array_sort;
-    int textlength = 0;
-
+    private int textlength = 0;
     private MyConstant myConstant;
     private String[] columnPassengerStrings;
     private String tag = "18AprilV2";
@@ -43,13 +38,20 @@ public class ServiceActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
-        myConstant = new MyConstant();
-        columnPassengerStrings = myConstant.getPassengerColumnStrings();
+        //Setup Constant
+        setupConstant();
 
+        //Create Search View
+        createSearchView();
+
+
+    }   // Main Method
+
+    private void createSearchView() {
         try {
 
-            et = (EditText) findViewById(R.id.edtSearch);
-            lv = (ListView) findViewById(android.R.id.list);
+            editText = (EditText) findViewById(R.id.edtSearch);
+            listView = (ListView) findViewById(android.R.id.list);
 
             //Get Data from passengerTABLE
             GetAllData getAllData = new GetAllData(ServiceActivity.this);
@@ -70,7 +72,7 @@ public class ServiceActivity extends ListActivity {
             setListAdapter(new bsAdapter(this));
 
 
-            et.addTextChangedListener(new TextWatcher() {
+            editText.addTextChangedListener(new TextWatcher() {
                 public void afterTextChanged(Editable s) {
                     // Abstract Method of TextWatcher Interface.
                 }
@@ -82,7 +84,7 @@ public class ServiceActivity extends ListActivity {
 
                 public void onTextChanged(CharSequence s,
                                           int start, int before, int count) {
-                    textlength = et.getText().length();
+                    textlength = editText.getText().length();
                     array_sort.clear();
                     for (int i = 0; i < listview_names.length; i++) {
                         if (textlength <= listview_names[i].length()) {
@@ -106,7 +108,7 @@ public class ServiceActivity extends ListActivity {
                              */
 
                             if (listview_names[i].toLowerCase().contains(
-                                    et.getText().toString().toLowerCase().trim())) {
+                                    editText.getText().toString().toLowerCase().trim())) {
                                 array_sort.add(listview_names[i]);
                             }
                         }
@@ -115,7 +117,7 @@ public class ServiceActivity extends ListActivity {
                 }
             });
 
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> arg0,
                                         View arg1, int position, long arg3) {
@@ -129,9 +131,12 @@ public class ServiceActivity extends ListActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
-    }   // Main Method
+    private void setupConstant() {
+        myConstant = new MyConstant();
+        columnPassengerStrings = myConstant.getPassengerColumnStrings();
+    }
 
     private void findDetailPhone(String strPhone) {
 
@@ -204,5 +209,5 @@ public class ServiceActivity extends ListActivity {
 
             return row;
         }
-    }
-}
+    }    //bsAdapter
+}   // Main Class
