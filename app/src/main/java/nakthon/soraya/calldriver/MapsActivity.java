@@ -12,7 +12,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
@@ -24,7 +26,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String tag = "20AprilV1";
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
-
+    private double startLatADouble = 0, startLngADouble =0, destinationLatADouble=0, destinationLngADouble=0;
+    private MarkerOptions startMarker, destinationMarker;
 
 
     @Override
@@ -87,9 +90,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         centerLatLng = new LatLng(13.668087, 100.622625);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 16));
 
+        createMarker();
+
 
 
     }   // onMapReady
+
+    private void createMarker() {
+
+        try {
+
+            mMap.clear();
+            startLatLng = new LatLng(startLatADouble, startLngADouble);
+            destinationLatLng = new LatLng(destinationLatADouble, destinationLngADouble);
+
+            startMarker = new MarkerOptions()
+                    .position(startLatLng)
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.mipmap.ic_marker_start));
+
+            destinationMarker = new MarkerOptions()
+                    .position(destinationLatLng)
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.mipmap.ic_marker_destination));
+
+            mMap.addMarker(startMarker);
+            mMap.addMarker(destinationMarker);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -129,14 +163,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case 1000:
 
                 startTextView.setText(resultStrings[1]);
+                startLatADouble = Double.parseDouble(resultStrings[2]);
+                startLngADouble = Double.parseDouble(resultStrings[3]);
+                
 
                 break;
             case 1001:
 
                 destinationTextView.setText(resultStrings[1]);
+                destinationLatADouble = Double.parseDouble(resultStrings[2]);
+                destinationLngADouble = Double.parseDouble(resultStrings[3]);
 
                 break;
         }
+
+        createMarker();
 
 
     }   // showTextAnMarker
