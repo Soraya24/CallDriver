@@ -2,6 +2,7 @@ package nakthon.soraya.calldriver;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -152,6 +153,10 @@ public class ServiceActivity extends ListActivity {
                 Log.d(tag, "passengerString(" + i + ") ==> " + passengerStrings[i]);
             }   // for
 
+            //Intent to Map
+            Intent intent = new Intent(ServiceActivity.this, MapsActivity.class);
+            intent.putExtra("Passenger", passengerStrings);
+            startActivity(intent);
 
         } catch (Exception e) {
             Log.d("12decV2", "e findDetail ==> " + e.toString());
