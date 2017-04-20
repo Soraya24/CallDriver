@@ -2,6 +2,8 @@ package nakthon.soraya.calldriver;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,6 +18,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private String[] passengerStrings;
     private TextView nameTextView, phoneTextView;
+    private EditText startEditText, destinationEditText;
+    private ListView startListView, destinationListView;
 
 
     @Override
@@ -45,6 +49,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void initialView() {
         nameTextView = (TextView) findViewById(R.id.txtName);
         phoneTextView = (TextView) findViewById(R.id.txtPhone);
+        startEditText = (EditText) findViewById(R.id.edtStart);
+        destinationEditText = (EditText) findViewById(R.id.edtDestination);
+        startListView = (ListView) findViewById(R.id.livStart);
+        destinationListView = (ListView) findViewById(R.id.livDestination);
     }
 
     private void getValueFromIntent() {
