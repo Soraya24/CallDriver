@@ -2,6 +2,7 @@ package nakthon.soraya.calldriver;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,10 +29,11 @@ public class SearchLocationActivity extends ListActivity {
     private ListView listView;
     private String[] listview_names;
     private ArrayList<String> array_sort;
-    private int textlength = 0;
+    private int textlength = 0, Index;
     private MyConstant myConstant;
     private String[] columnLocationStrings;
     private String tag = "20AprilV1";
+    private int[] ints = new int[]{1000, 1001};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +138,7 @@ public class SearchLocationActivity extends ListActivity {
     private void setupConstant() {
         myConstant = new MyConstant();
         columnLocationStrings = myConstant.getLocationColumnStrings();
+        Index = getIntent().getIntExtra("Index", 0);
     }
 
     private void findDetailPhone(String strLocation) {
@@ -157,11 +160,12 @@ public class SearchLocationActivity extends ListActivity {
                 locationStrings[i] = jsonObject.getString(columnLocationStrings[i]);
                 Log.d(tag, "locationString(" + i + ") ==> " + locationStrings[i]);
             }   // for
-//
-//            //Intent to Map
-//            Intent intent = new Intent(SearchLocationActivity.this, MapsActivity.class);
-//            intent.putExtra("Passenger", passengerStrings);
-//            startActivity(intent);
+
+            //Back Finish
+            Intent intent = new Intent(SearchLocationActivity.this, MapsActivity.class);
+            intent.putExtra("Result", locationStrings);
+            setResult(ints[Index], intent);
+            finish();
 
         } catch (Exception e) {
             Log.d(tag, "e findDetail ==> " + e.toString());

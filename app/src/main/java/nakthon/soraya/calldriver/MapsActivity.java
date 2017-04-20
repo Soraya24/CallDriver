@@ -3,6 +3,7 @@ package nakthon.soraya.calldriver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView nameTextView, phoneTextView;
     private TextView startTextView, destinationTextView;
     private ImageView startImageView, destinationImageView;
+    private String tag = "20AprilV1";
+    private String[] resultStrings;
 
 
     @Override
@@ -92,13 +95,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (view == startImageView) {
             Intent intent = new Intent(MapsActivity.this, SearchLocationActivity.class);
             intent.putExtra("Index", 0);
-            startActivity(intent);
+            startActivityForResult(intent, 1000);
         }
         if (view == destinationImageView) {
             Intent intent = new Intent(MapsActivity.this, SearchLocationActivity.class);
             intent.putExtra("Index", 1);
-            startActivity(intent);
+            startActivityForResult(intent, 1001);
         }
 
     }   // onClick
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        resultStrings = data.getStringArrayExtra("Result");
+        showTextAnMarker(requestCode, resultStrings);
+
+
+
+    }   // onActivityResult
+
+    private void showTextAnMarker(int requestCode, String[] resultStrings) {
+
+        Log.d(tag, "requestCode ==> " + requestCode);
+        for (int i=0;i<resultStrings.length;i++) {
+            Log.d(tag, "resultString(" + i + ") ==> " + resultStrings[i]);
+        }
+
+        switch (requestCode) {
+            case 1000:
+
+                startTextView.setText(resultStrings[1]);
+
+                break;
+            case 1001:
+
+                destinationTextView.setText(resultStrings[1]);
+
+                break;
+        }
+
+
+    }   // showTextAnMarker
 }   // Main Class
