@@ -215,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(tag, "NameLat ==> " + startLatADouble);
         Log.d(tag, "NameLng ==> " + startLngADouble);
         Log.d(tag, "Destination ==> " + destinationTextView.getText());
-        Log.d(tag, "DestinationLat ==> " +destinationLatADouble);
+        Log.d(tag, "DestinationLat ==> " + destinationLatADouble);
         Log.d(tag, "DestinationLng ==> " + destinationLngADouble);
 
     }   // uploadJob
