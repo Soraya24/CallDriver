@@ -23,16 +23,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ServiceActivity extends ListActivity {
+public class SearchLocationActivity extends ListActivity {
 
     private EditText editText;
     private ListView listView;
     private String[] listview_names;
     private ArrayList<String> array_sort;
-    private int textlength = 0;
+    private int textlength = 0, Index;
     private MyConstant myConstant;
-    private String[] columnPassengerStrings;
-    private String tag = "18AprilV2";
+    private String[] columnLocationStrings;
+    private String tag = "20AprilV1";
+    private int[] ints = new int[]{1000, 1001};
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,8 @@ public class ServiceActivity extends ListActivity {
             listView = (ListView) findViewById(android.R.id.list);
 
             //Get Data from passengerTABLE
-            GetAllData getAllData = new GetAllData(ServiceActivity.this);
-            getAllData.execute(myConstant.getUrlGetPassenger());
+            GetAllData getAllData = new GetAllData(SearchLocationActivity.this);
+            getAllData.execute(myConstant.getUrlGetLocation());
             String strJSON = getAllData.get();
             Log.d(tag, "JSON ==> " + strJSON);
 
@@ -64,7 +65,7 @@ public class ServiceActivity extends ListActivity {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                listview_names[i] = jsonObject.getString(columnPassengerStrings[2]);
+                listview_names[i] = jsonObject.getString(columnLocationStrings[1]);
             }   // for
 
 
@@ -136,36 +137,38 @@ public class ServiceActivity extends ListActivity {
 
     private void setupConstant() {
         myConstant = new MyConstant();
-        columnPassengerStrings = myConstant.getPassengerColumnStrings();
+        columnLocationStrings = myConstant.getLocationColumnStrings();
+        Index = getIntent().getIntExtra("Index", 0);
     }
 
-    private void findDetailPhone(String strPhone) {
+    private void findDetailPhone(String strLocation) {
 
         try {
 
-            Log.d(tag, "strPhone ==> " + strPhone);
+            Log.d(tag, "strLocation ==> " + strLocation);
 
-            GetDataWhere getDataWhere = new GetDataWhere(ServiceActivity.this);
-            getDataWhere.execute(columnPassengerStrings[2], strPhone,
-                    myConstant.getUrlGetPassengerWherePhone());
+            GetDataWhere getDataWhere = new GetDataWhere(SearchLocationActivity.this);
+            getDataWhere.execute(columnLocationStrings[1], strLocation,
+                    myConstant.getUrlGetLocationWhereName());
             String strJSON = getDataWhere.get();
             Log.d(tag, "JSON where ==> " + strJSON);
 
-            String[] passengerStrings = new String[columnPassengerStrings.length];
+            String[] locationStrings = new String[columnLocationStrings.length];
             JSONArray jsonArray = new JSONArray(strJSON);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            for (int i = 0; i < columnPassengerStrings.length; i++) {
-                passengerStrings[i] = jsonObject.getString(columnPassengerStrings[i]);
-                Log.d(tag, "passengerString(" + i + ") ==> " + passengerStrings[i]);
+            for (int i = 0; i < columnLocationStrings.length; i++) {
+                locationStrings[i] = jsonObject.getString(columnLocationStrings[i]);
+                Log.d(tag, "locationString(" + i + ") ==> " + locationStrings[i]);
             }   // for
 
-            //Intent to Map
-            Intent intent = new Intent(ServiceActivity.this, MapsActivity.class);
-            intent.putExtra("Passenger", passengerStrings);
-            startActivity(intent);
+            //Back Finish
+            Intent intent = new Intent(SearchLocationActivity.this, MapsActivity.class);
+            intent.putExtra("Result", locationStrings);
+            setResult(ints[Index], intent);
+            finish();
 
         } catch (Exception e) {
-            Log.d("12decV2", "e findDetail ==> " + e.toString());
+            Log.d(tag, "e findDetail ==> " + e.toString());
         }
 
     }   // findDetail

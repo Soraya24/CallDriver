@@ -25,11 +25,11 @@
     </LinearLayout>
 
     <ListView
-        android:layout_above="@+id/linbotton"
-        android:layout_below="@id/linTop"
         android:id="@+id/android:list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linTop"
+        ></ListView>
 
     <LinearLayout
         android:layout_alignParentBottom="true"
@@ -38,33 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:src="@mipmap/ic_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/edtName"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryLight"
-                android:hint="@string/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSave"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="@drawable/bg_buttom"
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
