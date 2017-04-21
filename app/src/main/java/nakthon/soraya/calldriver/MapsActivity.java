@@ -31,15 +31,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private String[] passengerStrings;
     private TextView nameTextView, phoneTextView;
-    private TextView startTextView, destinationTextView;
+    private TextView startTextView, destinationTextView, distanceTextView;
     private ImageView startImageView, destinationImageView;
-    private String tag = "20AprilV1";
+    private String tag = "20AprilV1", distanceString;
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
     private double startLatADouble = 0, startLngADouble = 0,
             destinationLatADouble = 0, destinationLngADouble = 0;
     private MarkerOptions startMarker, destinationMarker;
     private MyConstant myConstant;
+
 
 
     @Override
@@ -82,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         destinationTextView = (TextView) findViewById(R.id.edtDestination);
         startImageView = (ImageView) findViewById(R.id.imvStart);
         destinationImageView = (ImageView) findViewById(R.id.imvDestination);
+        distanceTextView = (TextView) findViewById(R.id.txtDistance);
 
     }
 
@@ -208,6 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .execute(this);
 
 
+
     }
 
     @Override
@@ -224,7 +227,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Route route = direction.getRouteList().get(0);
             Leg leg = route.getLegList().get(0);
-            Log.d(tag, "distance ==> " + leg.getDistance().getText());
+            distanceString = leg.getDistance().getText();
+            Log.d(tag, "distance ==> " + distanceString);
+
+            distanceTextView.setText(distanceString);
 
         }   // if
 
