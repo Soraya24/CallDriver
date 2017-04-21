@@ -36,8 +36,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String tag = "20AprilV1";
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
-    private double startLatADouble = 0, startLngADouble =0,
-            destinationLatADouble=0, destinationLngADouble=0;
+    private double startLatADouble = 0, startLngADouble = 0,
+            destinationLatADouble = 0, destinationLngADouble = 0;
     private MarkerOptions startMarker, destinationMarker;
     private MyConstant myConstant;
 
@@ -105,7 +105,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         createMarker();
 
 
-
     }   // onMapReady
 
     private void createCenterMap(double lat, double lng) {
@@ -133,7 +132,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.addMarker(startMarker);
             mMap.addMarker(destinationMarker);
-
 
 
         } catch (Exception e) {
@@ -166,13 +164,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         showTextAnMarker(requestCode, resultStrings);
 
 
-
     }   // onActivityResult
 
     private void showTextAnMarker(int requestCode, String[] resultStrings) {
 
         Log.d(tag, "requestCode ==> " + requestCode);
-        for (int i=0;i<resultStrings.length;i++) {
+        for (int i = 0; i < resultStrings.length; i++) {
             Log.d(tag, "resultString(" + i + ") ==> " + resultStrings[i]);
         }
 
@@ -209,7 +206,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .to(destinationLatLng)
                 .transportMode(TransportMode.DRIVING)
                 .execute(this);
-
 
 
     }
