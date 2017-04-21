@@ -1,13 +1,18 @@
 package nakthon.soraya.calldriver;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.akexorcist.googledirection.DirectionCallback;
 import com.akexorcist.googledirection.GoogleDirection;
@@ -25,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, DirectionCallback {
 
@@ -32,15 +38,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String[] passengerStrings;
     private TextView nameTextView, phoneTextView;
     private TextView startTextView, destinationTextView,
-            distanceTextView, priceTextView;
-    private ImageView startImageView, destinationImageView;
-    private String tag = "20AprilV1", distanceString;
+            distanceTextView, priceTextView,
+            dateTextView, timeTextView;
+    private ImageView startImageView, destinationImageView,
+            dateImageView, timeImageView;
+    private String tag = "20AprilV1", distanceString, dateString, timeString;
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
     private double startLatADouble = 0, startLngADouble = 0,
             destinationLatADouble = 0, destinationLngADouble = 0;
     private MarkerOptions startMarker, destinationMarker;
     private MyConstant myConstant;
+    private int intDay, intMonth, intYear, hourAnInt, minusAnInt, secondAnInt;
+    private Button cancleButton, okButton;
 
 
     @Override
@@ -53,6 +63,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Get Value From Intent
         getValueFromIntent();
+
+        //Get Curent Date and Time
+        getCurrentDataTime();
 
         //Show View
         showView();
@@ -69,6 +82,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void imageController() {
         startImageView.setOnClickListener(MapsActivity.this);
         destinationImageView.setOnClickListener(MapsActivity.this);
+        dateImageView.setOnClickListener(MapsActivity.this);
+        timeImageView.setOnClickListener(MapsActivity.this);
+        cancleButton.setOnClickListener(MapsActivity.this);
+        okButton.setOnClickListener(MapsActivity.this);
     }
 
     private void showView() {
@@ -85,6 +102,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         destinationImageView = (ImageView) findViewById(R.id.imvDestination);
         distanceTextView = (TextView) findViewById(R.id.txtDistance);
         priceTextView = (TextView) findViewById(R.id.txtPrice);
+        dateImageView = (ImageView) findViewById(R.id.imvDate);
+        timeImageView = (ImageView) findViewById(R.id.imvTime);
+        dateTextView = (TextView) findViewById(R.id.txtDate);
+        timeTextView = (TextView) findViewById(R.id.txtTime);
+        cancleButton = (Button) findViewById(R.id.btnCancel);
+        okButton = (Button) findViewById(R.id.btnCancel);
 
     }
 
@@ -156,8 +179,84 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             intent.putExtra("Index", 1);
             startActivityForResult(intent, 1001);
         }
+        if (view == dateImageView) {
+            showDateDialog();
+        }
+        if (view == timeImageView) {
+            showTimeDialog();
+        }
+        if (view == cancleButton) {
+            finish();
+        }
+        if (view == okButton) {
+            uploadJobToServer();
+        }
+
 
     }   // onClick
+
+    private void uploadJobToServer() {
+
+    }   // uploadJob
+
+    private void showTimeDialog() {
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MapsActivity.this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minus) {
+                        showTime(hour, minus, 0);
+                    }
+                }, hourAnInt, minusAnInt, false);
+        timePickerDialog.show();
+    }
+
+    private void showDateDialog() {
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(MapsActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker,
+                                          int year, int month, int day) {
+                        showDate(day, month, year);
+                    }
+                }, intYear, intMonth, intDay);
+        datePickerDialog.show();
+
+    }
+
+    private void getCurrentDataTime() {
+        String tag = "21AprilV2";
+        Calendar calendar = Calendar.getInstance();
+        intDay = calendar.get(Calendar.DAY_OF_MONTH);
+        intMonth = calendar.get(Calendar.MONTH);
+        intYear = calendar.get(Calendar.YEAR);
+        hourAnInt = calendar.get(Calendar.HOUR_OF_DAY);
+        minusAnInt = calendar.get(Calendar.MINUTE);
+        secondAnInt = calendar.get(Calendar.SECOND);
+
+        Log.d(tag, "Day ==> " + intDay);
+        Log.d(tag, "Month ==> " + intMonth);
+        Log.d(tag, "Year ==> " + intYear);
+
+        showDate(intDay, intMonth, intYear);
+        showTime(hourAnInt, minusAnInt, secondAnInt);
+
+    }
+
+    private void showTime(int hourAnInt, int minusAnInt, int secondAnInt) {
+        timeString = Integer.toString(hourAnInt) + ":" +
+                Integer.toString(minusAnInt) + ":" +
+                "00";
+        timeTextView.setText(timeString);
+    }
+
+    private void showDate(int intDay, int intMonth, int intYear) {
+        dateString = Integer.toString(intDay) + "/" +
+                Integer.toString(intMonth + 1) + "/" +
+                Integer.toString(intYear);
+        dateTextView.setText(dateString + " ");
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
