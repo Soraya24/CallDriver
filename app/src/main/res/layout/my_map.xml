@@ -134,10 +134,12 @@
 
                 <TextView
 
+                    android:id="@+id/txtDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtDistance"
-                    android:textSize="80sp" /><TextView
+                    android:textSize="80sp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/price"
@@ -145,9 +147,9 @@
 
                 <TextView
 
+                    android:id="@+id/txtPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtPrice"
                     android:textSize="80sp" />
 
             </LinearLayout>
@@ -161,18 +163,41 @@
                 android:paddingLeft="@dimen/padding1">
 
                 <TextView
-                    android:id="@+id/txtDateTime"
+                    android:id="@+id/txtDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date - Time"
+                    android:text="Date"
                     android:textSize="@dimen/h1" />
 
-                <ImageView
-                    android:id="@+id/imvDateTime"
+                <TextView
+                    android:id="@+id/Time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/txtDate"
+                    android:text="Time"
+                    android:textSize="@dimen/h1" />
+
+                <LinearLayout
                     android:layout_alignParentRight="true"
-                    android:src="@mipmap/ic_test" />
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_dete" />
+
+                    <ImageView
+                        android:id="@+id/imvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_time" />
+
+                </LinearLayout>
+
+
 
             </RelativeLayout>
 
