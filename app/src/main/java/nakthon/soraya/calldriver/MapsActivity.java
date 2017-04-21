@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -42,7 +43,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             dateTextView, timeTextView;
     private ImageView startImageView, destinationImageView,
             dateImageView, timeImageView;
-    private String tag = "20AprilV1", distanceString, dateString, timeString;
+    private String tag = "20AprilV1", distanceString,
+            dateString, timeString, remarkString;
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
     private double startLatADouble = 0, startLngADouble = 0,
@@ -51,6 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MyConstant myConstant;
     private int intDay, intMonth, intYear, hourAnInt, minusAnInt, secondAnInt;
     private Button cancleButton, okButton;
+    private EditText editText;
 
 
     @Override
@@ -107,7 +110,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dateTextView = (TextView) findViewById(R.id.txtDate);
         timeTextView = (TextView) findViewById(R.id.txtTime);
         cancleButton = (Button) findViewById(R.id.btnCancel);
-        okButton = (Button) findViewById(R.id.btnCancel);
+        okButton = (Button) findViewById(R.id.btnOK);
+        editText = (EditText) findViewById(R.id.edtRemark);
 
     }
 
@@ -189,6 +193,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             finish();
         }
         if (view == okButton) {
+
+            remarkString = editText.getText().toString().trim();
+            if (remarkString.equals("")) {
+                remarkString = " ";
+            }
+            Log.d("21AprilV3", "Clicl OK");
             uploadJobToServer();
         }
 
@@ -196,6 +206,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }   // onClick
 
     private void uploadJobToServer() {
+
+        String tag = "21AprilV3";
+        Log.d(tag, "ID_passenger ==> " + passengerStrings[0]);
+        Log.d(tag, "Date ==> " + dateString);
+        Log.d(tag, "Time ==> " + timeString);
+        Log.d(tag, "NameStart ==> " + startTextView.getText());
+        Log.d(tag, "NameLat ==> " + startLatADouble);
+        Log.d(tag, "NameLng ==> " + startLngADouble);
+        Log.d(tag, "Destination ==> " + destinationTextView.getText());
+        Log.d(tag, "DestinationLat ==> " +destinationLatADouble);
+        Log.d(tag, "DestinationLng ==> " + destinationLngADouble);
 
     }   // uploadJob
 
