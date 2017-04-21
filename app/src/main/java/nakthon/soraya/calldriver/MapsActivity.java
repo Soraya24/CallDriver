@@ -1,6 +1,7 @@
 package nakthon.soraya.calldriver;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -8,6 +9,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.constant.TransportMode;
+import com.akexorcist.googledirection.model.Direction;
+import com.akexorcist.googledirection.model.Leg;
+import com.akexorcist.googledirection.model.Route;
+import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,7 +24,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
+import java.util.ArrayList;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, DirectionCallback {
 
     private GoogleMap mMap;
     private String[] passengerStrings;
@@ -26,8 +36,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String tag = "20AprilV1";
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
-    private double startLatADouble = 0, startLngADouble =0, destinationLatADouble=0, destinationLngADouble=0;
+    private double startLatADouble = 0, startLngADouble =0,
+            destinationLatADouble=0, destinationLngADouble=0;
     private MarkerOptions startMarker, destinationMarker;
+    private MyConstant myConstant;
 
 
     @Override
@@ -75,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void getValueFromIntent() {
         passengerStrings = getIntent().getStringArrayExtra("Passenger");
+        myConstant = new MyConstant();
     }
 
     private void setupFragmentMap() {
@@ -184,6 +197,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         createMarker();
 
+        requestDirection();
+
 
     }   // showTextAnMarker
+
+    public void requestDirection() {
+
+        GoogleDirection.withServerKey(myConstant.getServerKeyString())
+                .from(startLatLng)
+                .to(destinationLatLng)
+                .transportMode(TransportMode.DRIVING)
+                .execute(this);
+
+
+
+    }
+
+    @Override
+    public void onDirectionSuccess(Direction direction, String rawBody) {
+
+        String tag = "21AprilV1";
+
+        if (direction.isOK()) {
+
+            ArrayList<LatLng> directionPositionList = direction.getRouteList()
+                    .get(0).getLegList().get(0).getDirectionPoint();
+            mMap.addPolyline(DirectionConverter
+                    .createPolyline(this, directionPositionList, 5, Color.BLUE));
+
+            Route route = direction.getRouteList().get(0);
+            Leg leg = route.getLegList().get(0);
+            Log.d(tag, "distance ==> " + leg.getDistance().getText());
+
+        }   // if
+
+    }
+
+    @Override
+    public void onDirectionFailure(Throwable t) {
+
+    }
 }   // Main Class
