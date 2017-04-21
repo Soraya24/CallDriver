@@ -14,6 +14,9 @@
     <string name="phone">Phone :</string>
     <string name="start">Start</string>
     <string name="destination">Destination</string>
+    <string name="distance">Distance</string>
+    <string name="price">Price</string>
+    <string name="remark">Remark :</string>
 
 
 </resources>

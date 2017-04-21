@@ -7,6 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -17,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/relbotton"
+
                 android:orientation="vertical"
                 android:padding="@dimen/padding1">
 
@@ -97,79 +100,145 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:textSize="@dimen/h2"
-                        android:text="@string/start"
                         android:id="@+id/edtStart"
                         android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:text="@string/start"
+                        android:textSize="@dimen/h2" />
 
                     <ImageView
                         android:id="@+id/imvStart"
-                        android:src="@mipmap/ic_marker_start"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_marker_start" />
 
                     <TextView
-                        android:textSize="@dimen/h2"
-                        android:text="@string/destination"
                         android:id="@+id/edtDestination"
                         android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:text="@string/destination"
+                        android:textSize="@dimen/h2" />
 
                     <ImageView
                         android:id="@+id/imvDestination"
-                        android:src="@mipmap/ic_marker_destination"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_marker_destination" />
 
                 </LinearLayout>
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="horizontal">-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/distance"
+                    android:textSize="@dimen/h1" />
 
-                    <!--<ListView-->
-                        <!--android:id="@+id/livStart"-->
-                        <!--android:layout_width="@dimen/zero"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_weight="1" />-->
+                <TextView
 
-                    <!--<ListView-->
-                        <!--android:id="@+id/livDestination"-->
-                        <!--android:layout_width="@dimen/zero"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_weight="1" />-->
+                    android:id="@+id/txtDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h3" />
 
-                <!--</LinearLayout>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    android:textSize="@dimen/h1" />
+
+                <TextView
+
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/h3" />
+
+                <EditText
+                    android:id="@+id/edtRemark"
+                    android:layout_marginTop="@dimen/padding1"
+                    android:hint="@string/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/relbotton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:paddingBottom="@dimen/padding1"
-                android:paddingLeft="@dimen/padding1">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtDateTime"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/relbotton"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date - Time"
-                    android:textSize="@dimen/h1" />
 
-                <ImageView
-                    android:id="@+id/imvDateTime"
-                    android:layout_width="wrap_content"
+                    android:paddingBottom="@dimen/padding1"
+                    android:paddingLeft="@dimen/padding1">
+
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date"
+                        android:textSize="@dimen/h1" />
+
+                    <TextView
+                        android:id="@+id/txtTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txtDate"
+                        android:text="Time"
+                        android:textSize="@dimen/h1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imvDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_dete" />
+
+                        <ImageView
+                            android:id="@+id/imvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_time" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/ic_test" />
+                    android:orientation="horizontal">
 
-            </RelativeLayout>
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:text="Cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/btnOK"
+                        android:text="OK"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 

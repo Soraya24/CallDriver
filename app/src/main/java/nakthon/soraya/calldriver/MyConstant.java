@@ -18,6 +18,12 @@ public class MyConstant {
     private String[] passengerColumnStrings = new String[]{"id", "Name", "Phone"};
     private String[] locationColumnStrings = new String[]{"id", "Name", "Lat", "Lng"};
 
+    private String serverKeyString = "AIzaSyD_6HZwKgnxSOSkMWocLs4-2AViQuPBteQ";
+
+    public String getServerKeyString() {
+        return serverKeyString;
+    }
+
     public String getUrlGetLocationWhereName() {
         return urlGetLocationWhereName;
     }
