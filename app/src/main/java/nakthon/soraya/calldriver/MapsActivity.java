@@ -31,7 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private String[] passengerStrings;
     private TextView nameTextView, phoneTextView;
-    private TextView startTextView, destinationTextView, distanceTextView;
+    private TextView startTextView, destinationTextView,
+            distanceTextView, priceTextView;
     private ImageView startImageView, destinationImageView;
     private String tag = "20AprilV1", distanceString;
     private String[] resultStrings;
@@ -40,7 +41,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             destinationLatADouble = 0, destinationLngADouble = 0;
     private MarkerOptions startMarker, destinationMarker;
     private MyConstant myConstant;
-
 
 
     @Override
@@ -84,6 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startImageView = (ImageView) findViewById(R.id.imvStart);
         destinationImageView = (ImageView) findViewById(R.id.imvDestination);
         distanceTextView = (TextView) findViewById(R.id.txtDistance);
+        priceTextView = (TextView) findViewById(R.id.txtPrice);
 
     }
 
@@ -210,7 +211,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .execute(this);
 
 
-
     }
 
     @Override
@@ -231,9 +231,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d(tag, "distance ==> " + distanceString);
 
             distanceTextView.setText(distanceString);
+            priceTextView.setText(calculatePrice(distanceString));
 
         }   // if
 
+    }
+
+    private String calculatePrice(String distanceString) {
+
+        String[] strings = distanceString.split("km");
+        String tag = "21AprilV1";
+        Log.d(tag, "strings(0) ==> " + strings[0]);
+
+        double douPrice = Double.parseDouble(strings[0]) * 2;
+
+
+        return Double.toString(douPrice);
     }
 
     @Override
