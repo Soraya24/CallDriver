@@ -45,6 +45,7 @@ public class ServiceActivity extends ListActivity {
         createSearchView();
 
 
+
     }   // Main Method
 
     private void createSearchView() {
