@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Password True
                 Toast.makeText(MainActivity.this, "Welcome " + loginStrings[1],
                         Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
                 intent.putExtra("Login", loginStrings);
                 startActivity(intent);
                 finish();
