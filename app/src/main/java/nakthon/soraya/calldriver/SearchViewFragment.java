@@ -1,9 +1,10 @@
 package nakthon.soraya.calldriver;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ListFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,7 +24,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ServiceActivity extends ListActivity {
+/**
+ * Created by masterUNG on 6/26/2017 AD.
+ */
+
+public class SearchViewFragment extends ListFragment{
 
     private EditText editText;
     private ListView listView;
@@ -34,9 +39,24 @@ public class ServiceActivity extends ListActivity {
     private String[] columnPassengerStrings;
     private String tag = "18AprilV2";
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_service, container, false);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service);
+
+
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         //Setup Constant
         setupConstant();
@@ -44,19 +64,16 @@ public class ServiceActivity extends ListActivity {
         //Create Search View
         createSearchView();
 
-
-
-
-    }   // Main Method
+    }
 
     private void createSearchView() {
         try {
 
-            editText = (EditText) findViewById(R.id.edtSearch);
-            listView = (ListView) findViewById(android.R.id.list);
+            editText = (EditText) getView().findViewById(R.id.edtSearch);
+            listView = (ListView) getView().findViewById(android.R.id.list);
 
             //Get Data from passengerTABLE
-            GetAllData getAllData = new GetAllData(ServiceActivity.this);
+            GetAllData getAllData = new GetAllData(getActivity());
             getAllData.execute(myConstant.getUrlGetPassenger());
             String strJSON = getAllData.get();
             Log.d(tag, "JSON ==> " + strJSON);
@@ -71,7 +88,7 @@ public class ServiceActivity extends ListActivity {
 
 
             array_sort = new ArrayList<String>(Arrays.asList(listview_names));
-            setListAdapter(new bsAdapter(this));
+            setListAdapter(new bsAdapter(getActivity()));
 
 
             editText.addTextChangedListener(new TextWatcher() {
@@ -123,7 +140,7 @@ public class ServiceActivity extends ListActivity {
 
                 public void onItemClick(AdapterView<?> arg0,
                                         View arg1, int position, long arg3) {
-                    Toast.makeText(getApplicationContext(), array_sort.get(position),
+                    Toast.makeText(getActivity(), array_sort.get(position),
                             Toast.LENGTH_SHORT).show();
                     findDetailPhone(array_sort.get(position));
                 }
@@ -147,7 +164,7 @@ public class ServiceActivity extends ListActivity {
 
             Log.d(tag, "strPhone ==> " + strPhone);
 
-            GetDataWhere getDataWhere = new GetDataWhere(ServiceActivity.this);
+            GetDataWhere getDataWhere = new GetDataWhere(getActivity());
             getDataWhere.execute(columnPassengerStrings[2], strPhone,
                     myConstant.getUrlGetPassengerWherePhone());
             String strJSON = getDataWhere.get();
@@ -162,7 +179,7 @@ public class ServiceActivity extends ListActivity {
             }   // for
 
             //Intent to Map
-            Intent intent = new Intent(ServiceActivity.this, MapsActivity.class);
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
             intent.putExtra("Passenger", passengerStrings);
             startActivity(intent);
 
@@ -173,7 +190,7 @@ public class ServiceActivity extends ListActivity {
     }   // findDetail
 
     public void AppendList(ArrayList<String> str) {
-        setListAdapter(new bsAdapter(this));
+        setListAdapter(new bsAdapter(getActivity()));
     }
 
     public class bsAdapter extends BaseAdapter {
@@ -215,4 +232,4 @@ public class ServiceActivity extends ListActivity {
     }    //bsAdapter
 
 
-}   // Main Class
+}   // Class
