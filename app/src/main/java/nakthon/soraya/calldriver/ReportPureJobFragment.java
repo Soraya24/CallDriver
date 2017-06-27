@@ -3,6 +3,7 @@ package nakthon.soraya.calldriver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by masterUNG on 6/26/2017 AD.
  */
 
-public class ReportPureJobFragment extends Fragment{
+public class ReportPureJobFragment extends Fragment {
 
     //Explicit
     private TextView[] textViews = new TextView[7];
@@ -37,19 +41,78 @@ public class ReportPureJobFragment extends Fragment{
         //Show Column
         showColumn();
 
+        //Create ListView
+        createListView();
+
+    }
+
+    private void createListView() {
+
         ListView listView = getView().findViewById(R.id.livPureJob);
+        String tag = "27JuneV1";
+        MyConstant myConstant = new MyConstant();
+        String urlPHP_getAllPassenger = myConstant.getUrlGetAllPureJom();
+        String urlPHP_getPassengerWhereID = myConstant.getUrlGetPassengerWhereID();
+
 
         String[] strings = new String[]{"Test1", "Test2", "Test3", "dffd", "dfdf", "dfdff"};
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, strings);
         listView.setAdapter(stringArrayAdapter);
 
-    }
+        try {
+
+            //Get All ID from passengerTABLE
+            GetAllData getAllData = new GetAllData(getActivity());
+            getAllData.execute(urlPHP_getAllPassenger);
+            String jsonAllPassenger = getAllData.get();
+            Log.d(tag, "JSPN ALL Passenger ==> " + jsonAllPassenger);
+
+            JSONArray jsonArray = new JSONArray(jsonAllPassenger);
+            int index = jsonArray.length();
+            Log.d(tag, "jsonArray.length ==> " + index);
+            String[] valueColumn1Strings1 = new String[jsonArray.length()];
+            Log.d(tag, "value1.lentth ==> " + valueColumn1Strings1.length);
+
+            String[] valueColumn1Strings2 = new String[jsonArray.length()];
+            String[] valueColumn1Strings3 = new String[jsonArray.length()];
+            String[] valueColumn1Strings4 = new String[jsonArray.length()];
+            String[] valueColumn1Strings5 = new String[jsonArray.length()];
+            String[] valueColumn1Strings6 = new String[jsonArray.length()];
+            String[] valueColumn1Strings7 = new String[jsonArray.length()];
+
+            for (int i = 0; i < jsonArray.length(); i += 1) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                valueColumn1Strings1[i] = jsonObject.getString("id");
+                valueColumn1Strings2[i] = "";
+                valueColumn1Strings3[i] = "";
+                valueColumn1Strings4[i] = "";
+                valueColumn1Strings5[i] = "";
+                valueColumn1Strings6[i] = jsonObject.getString("TimeWork");
+                valueColumn1Strings7[i] = "";
+
+                //For Show Log
+                Log.d(tag, "valueColumn1[" + i + "] ==> " + valueColumn1Strings1[i]);
+//
+            }   // for
+
+            ReportPureJobAdapter reportPureJobAdapter = new ReportPureJobAdapter(getActivity(),
+                    valueColumn1Strings1, valueColumn1Strings2, valueColumn1Strings3,
+                    valueColumn1Strings4, valueColumn1Strings5,
+                    valueColumn1Strings6, valueColumn1Strings7);
+            listView.setAdapter(reportPureJobAdapter);
+
+
+        } catch (Exception e) {
+            Log.d(tag, "e ==> " + e.toString());
+        }
+
+    }   // create ListView
 
     private void showColumn() {
         MyConstant myConstant = new MyConstant();
         String[] columnStrings = myConstant.getColumnReportPureJobFragmentStrings();
-        for (int i=0;i<ints.length;i+=1) {
+        for (int i = 0; i < ints.length; i += 1) {
             textViews[i] = getView().findViewById(ints[i]);
             textViews[i].setText(columnStrings[i]);
         }
