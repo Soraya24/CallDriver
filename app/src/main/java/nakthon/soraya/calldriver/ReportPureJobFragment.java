@@ -84,8 +84,8 @@ public class ReportPureJobFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i += 1) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 valueColumn1Strings1[i] = jsonObject.getString("id");
-                valueColumn1Strings2[i] = "";
-                valueColumn1Strings3[i] = "";
+                valueColumn1Strings2[i] = findNameAndPhone(0, jsonObject.getString("id_Passenger"));
+                valueColumn1Strings3[i] = findNameAndPhone(1, jsonObject.getString("id_Passenger"));
                 valueColumn1Strings4[i] = "";
                 valueColumn1Strings5[i] = "";
                 valueColumn1Strings6[i] = jsonObject.getString("TimeWork");
@@ -108,6 +108,37 @@ public class ReportPureJobFragment extends Fragment {
         }
 
     }   // create ListView
+
+    private String findNameAndPhone(int index, String id_passenger) {
+
+        String result = null;
+        MyConstant myConstant = new MyConstant();
+
+        try {
+
+            GetDataWhere getDataWhere = new GetDataWhere(getActivity());
+            getDataWhere.execute("id", id_passenger, myConstant.getUrlGetPassengerWhereID());
+
+            JSONArray jsonArray = new JSONArray(getDataWhere.get());
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            switch (index) {
+                case 0:
+                    result = jsonObject.getString("Name");
+                    break;
+                case 1:
+                    result = jsonObject.getString("Phone");
+                    break;
+            }
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
 
     private void showColumn() {
         MyConstant myConstant = new MyConstant();
