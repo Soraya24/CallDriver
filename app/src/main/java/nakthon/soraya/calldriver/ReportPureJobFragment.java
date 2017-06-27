@@ -1,5 +1,7 @@
 package nakthon.soraya.calldriver;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,9 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by masterUNG on 6/26/2017 AD.
@@ -86,7 +91,7 @@ public class ReportPureJobFragment extends Fragment {
                 valueColumn1Strings1[i] = jsonObject.getString("id");
                 valueColumn1Strings2[i] = findNameAndPhone(0, jsonObject.getString("id_Passenger"));
                 valueColumn1Strings3[i] = findNameAndPhone(1, jsonObject.getString("id_Passenger"));
-                valueColumn1Strings4[i] = "";
+                valueColumn1Strings4[i] = findNameAddress(jsonObject.getString("LatStart"), jsonObject.getString("LngStart"));
                 valueColumn1Strings5[i] = "";
                 valueColumn1Strings6[i] = jsonObject.getString("TimeWork");
                 valueColumn1Strings7[i] = "";
@@ -108,6 +113,31 @@ public class ReportPureJobFragment extends Fragment {
         }
 
     }   // create ListView
+
+    private String findNameAddress(String latStart, String lngStart) {
+
+        try {
+
+            String result = null;
+            Geocoder geocoder = new Geocoder(getActivity(), Locale.ENGLISH);
+            List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(latStart),
+                    Double.parseDouble(lngStart), 1);
+
+            if (addresses != null) {
+                Address returnAddress = addresses.get(0);
+                StringBuilder stringBuilder = new StringBuilder("Address:\n");
+                for (int i=0;i<returnAddress.getMaxAddressLineIndex();i+=1) {
+                    stringBuilder.append(returnAddress.getAddressLine(i)).append("\n");
+                }   // for
+                result = stringBuilder.toString();
+            }
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     private String findNameAndPhone(int index, String id_passenger) {
 
