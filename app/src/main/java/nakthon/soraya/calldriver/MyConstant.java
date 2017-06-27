@@ -12,13 +12,29 @@ public class MyConstant {
     private String urlGetPassengerWherePhone = "http://woodriverservice.com/Android/getPassengerWherePhone.php";
     private String urlGetLocation = "http://woodriverservice.com/Android/getLocation.php";
     private String urlGetLocationWhereName = "http://woodriverservice.com/Android/getLocationWhereName.php";
+    private String urlGetPassengerWhereID = "http://woodriverservice.com/Android/getPassengerWhereID.php";
+    private String urlGetAllPureJom = "http://woodriverservice.com/Android/getPureJob.php";
 
 
     private String[] loginStrings = new String[]{"id", "Name", "User", "Password"};
     private String[] passengerColumnStrings = new String[]{"id", "Name", "Phone"};
     private String[] locationColumnStrings = new String[]{"id", "Name", "Lat", "Lng"};
+    private String[] columnReportPureJobFragmentStrings = new String[]{"สำดับ", "ชื่อลูกค้า", "เบอร์", "จุดรับ", "จุดส่ง", "เวลา", "ราคา"};
+
 
     private String serverKeyString = "AIzaSyD_6HZwKgnxSOSkMWocLs4-2AViQuPBteQ";
+
+    public String getUrlGetAllPureJom() {
+        return urlGetAllPureJom;
+    }
+
+    public String getUrlGetPassengerWhereID() {
+        return urlGetPassengerWhereID;
+    }
+
+    public String[] getColumnReportPureJobFragmentStrings() {
+        return columnReportPureJobFragmentStrings;
+    }
 
     public String getServerKeyString() {
         return serverKeyString;

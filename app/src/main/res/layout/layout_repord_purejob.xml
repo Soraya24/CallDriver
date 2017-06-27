@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/txtColumn7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/livPureJob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
