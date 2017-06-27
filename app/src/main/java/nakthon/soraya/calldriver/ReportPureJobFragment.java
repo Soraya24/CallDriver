@@ -126,7 +126,7 @@ public class ReportPureJobFragment extends Fragment {
             if (addresses != null) {
                 Address returnAddress = addresses.get(0);
                 StringBuilder stringBuilder = new StringBuilder("Address:\n");
-                for (int i=0;i<returnAddress.getMaxAddressLineIndex();i+=1) {
+                for (int i = 0; i < returnAddress.getMaxAddressLineIndex(); i += 1) {
                     stringBuilder.append(returnAddress.getAddressLine(i)).append("\n");
                 }   // for
                 result = stringBuilder.toString();
