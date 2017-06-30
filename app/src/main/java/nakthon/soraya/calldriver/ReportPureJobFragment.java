@@ -136,8 +136,27 @@ public class ReportPureJobFragment extends Fragment {
         result = strings[strings.length - 1];
         Log.d(tag, "ค่า result return ==> " + result);
 
+        try {
 
-        return result;
+            MyConstant myConstant = new MyConstant();
+            GetDataWhere getDataWhere = new GetDataWhere(getActivity());
+            getDataWhere.execute("id", result, myConstant.getUrlGetNameWhereID());
+            String strJSON = getDataWhere.get();
+            Log.d(tag, "JSON ==> " + strJSON);
+
+            JSONArray jsonArray = new JSONArray(strJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            result = jsonObject.getString("Name");
+            return result;
+
+        } catch (Exception e) {
+            Log.d(tag, "e findLastLocation ==> " + e.toString());
+            return null;
+        }
+
+
+
     }
 
     private String findNameAddress(String latStart, String lngStart) {
