@@ -1,5 +1,6 @@
 package nakthon.soraya.calldriver;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,6 +52,8 @@ public class ReportPureJobFragment extends Fragment {
         createListView();
 
     }
+
+
 
     private void createListView() {
 
@@ -109,6 +113,16 @@ public class ReportPureJobFragment extends Fragment {
                     valueColumn1Strings4, valueColumn1Strings5,
                     valueColumn1Strings6, valueColumn1Strings7);
             listView.setAdapter(reportPureJobAdapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Intent intent = new Intent(getActivity(), ShowDetailOrderActivity.class);
+                    startActivity(intent);
+
+                }
+            });
 
 
         } catch (Exception e) {
