@@ -16,6 +16,7 @@ public class MyConstant {
     private String urlGetAllPureJom = "http://woodriverservice.com/Android/getPureJob.php";
     private String urlGetNameWhereID = "http://woodriverservice.com/Android/getNameWhereID.php";
     private String urlGetIdPassWhereID = "http://woodriverservice.com/Android/getIdPassWhereID.php";
+    private String urlGetPureJobWhereID = "http://woodriverservice.com/Android/getPureJobWhereID.php";
 
 
     private String[] loginStrings = new String[]{"id", "Name", "User", "Password"};
@@ -26,6 +27,10 @@ public class MyConstant {
 
     private String serverKeyString = "AIzaSyD_6HZwKgnxSOSkMWocLs4-2AViQuPBteQ";
 
+
+    public String getUrlGetPureJobWhereID() {
+        return urlGetPureJobWhereID;
+    }
 
     public String getUrlGetIdPassWhereID() {
         return urlGetIdPassWhereID;
