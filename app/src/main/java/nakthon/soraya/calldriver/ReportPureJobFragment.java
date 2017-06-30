@@ -148,6 +148,16 @@ public class ReportPureJobFragment extends Fragment {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
 
             result = jsonObject.getString("Name");
+
+            if (checkUnknow(result)) {
+
+                String strLat = jsonObject.getString("Lat");
+                String strLng = jsonObject.getString("Lng");
+
+                result = findNameAddress(strLat, strLng);
+
+            }
+
             return result;
 
         } catch (Exception e) {
@@ -155,6 +165,20 @@ public class ReportPureJobFragment extends Fragment {
             return null;
         }
 
+
+
+    }
+
+    private boolean checkUnknow(String result) {
+
+        String s = result.substring(0, 6);
+        Log.d("30JuneV1", "s ==> " + s);
+
+        if (s.equals("Unknow")) {
+            return true;
+        } else {
+            return false;
+        }
 
 
     }
