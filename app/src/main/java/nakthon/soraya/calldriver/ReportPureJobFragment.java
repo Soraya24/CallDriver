@@ -54,7 +54,6 @@ public class ReportPureJobFragment extends Fragment {
     }
 
 
-
     private void createListView() {
 
         ListView listView = getView().findViewById(R.id.livPureJob);
