@@ -67,7 +67,6 @@ public class ShowDetailOrderFragment extends Fragment {
         try {
 
 
-
             GetDataWhere getDataWhere = new GetDataWhere(getActivity());
             getDataWhere.execute("id", idUserString, myConstant.getUrlGetIdPassWhereID());
             String strJSON = getDataWhere.get();
@@ -76,6 +75,12 @@ public class ShowDetailOrderFragment extends Fragment {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String strID_passenger = jsonObject.getString("id_Passenger");
             Log.d(tag, "id_Passenger ==> " + strID_passenger);
+
+            String timeDate = jsonObject.getString("TimeWork");
+            Log.d(tag, "timeDate ==> " + timeDate);
+            String[] strings = timeDate.split(" ");
+            Log.d(tag, "strings[0] ==> " + strings[0]);
+            Log.d(tag, "strings[1] ==> " + strings[1]);
 
 
             GetDataWhere getDataWhere1 = new GetDataWhere(getActivity());
@@ -87,6 +92,8 @@ public class ShowDetailOrderFragment extends Fragment {
 
             nameTextView.setText(jsonObject1.getString("Name"));
             phoneTextView.setText(jsonObject1.getString("Phone"));
+            dateTextView.setText(strings[0]);
+            timeTextView.setText(strings[1]);
 
 
         } catch (Exception e) {
