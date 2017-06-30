@@ -92,12 +92,15 @@ public class ReportPureJobFragment extends Fragment {
                 valueColumn1Strings2[i] = findNameAndPhone(0, jsonObject.getString("id_Passenger"));
                 valueColumn1Strings3[i] = findNameAndPhone(1, jsonObject.getString("id_Passenger"));
                 valueColumn1Strings4[i] = findNameAddress(jsonObject.getString("LatStart"), jsonObject.getString("LngStart"));
-                valueColumn1Strings5[i] = "";
+
+                Log.d(tag, "Receive Return ==> " + findLastDestination(jsonObject.getString("Job")));
+                valueColumn1Strings5[i] = findLastDestination(jsonObject.getString("Job"));
+
                 valueColumn1Strings6[i] = jsonObject.getString("TimeWork");
                 valueColumn1Strings7[i] = "";
 
                 //For Show Log
-                Log.d(tag, "valueColumn1[" + i + "] ==> " + valueColumn1Strings1[i]);
+                Log.d(tag, "valueColumn5[" + i + "] ==> " + valueColumn1Strings5[i]);
 //
             }   // for
 
@@ -113,6 +116,71 @@ public class ReportPureJobFragment extends Fragment {
         }
 
     }   // create ListView
+
+    private String findLastDestination(String job) {
+
+        String result = null;
+        String tag = "29JuneV1";
+
+        Log.d(tag, "Job Pure ที่อ่านได้จาก JSON ==> " + job);
+
+        result = job.replace("[", "");
+        result = result.replace("]", "");
+
+        Log.d(tag, "result ที่ตัด [] ออกแล้่ว ==> " + result);
+
+        String[] strings = result.split(",");
+        for (int i = 0; i < strings.length; i += 1) {
+            Log.d(tag, "strings[" + i + "] ==> " + strings[i]);
+        }
+        result = strings[strings.length - 1];
+        Log.d(tag, "ค่า result return ==> " + result);
+
+        try {
+
+            MyConstant myConstant = new MyConstant();
+            GetDataWhere getDataWhere = new GetDataWhere(getActivity());
+            getDataWhere.execute("id", result, myConstant.getUrlGetNameWhereID());
+            String strJSON = getDataWhere.get();
+            Log.d(tag, "JSON ==> " + strJSON);
+
+            JSONArray jsonArray = new JSONArray(strJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            result = jsonObject.getString("Name");
+
+            if (checkUnknow(result)) {
+
+                String strLat = jsonObject.getString("Lat");
+                String strLng = jsonObject.getString("Lng");
+
+                result = findNameAddress(strLat, strLng);
+
+            }
+
+            return result;
+
+        } catch (Exception e) {
+            Log.d(tag, "e findLastLocation ==> " + e.toString());
+            return null;
+        }
+
+
+    }
+
+    private boolean checkUnknow(String result) {
+
+        String s = result.substring(0, 6);
+        Log.d("30JuneV1", "s ==> " + s);
+
+        if (s.equals("Unknow")) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
 
     private String findNameAddress(String latStart, String lngStart) {
 
