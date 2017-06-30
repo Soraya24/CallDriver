@@ -1,5 +1,6 @@
 package nakthon.soraya.calldriver;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +53,7 @@ public class ReportPureJobFragment extends Fragment {
 
     }
 
+
     private void createListView() {
 
         ListView listView = getView().findViewById(R.id.livPureJob);
@@ -76,7 +79,7 @@ public class ReportPureJobFragment extends Fragment {
             JSONArray jsonArray = new JSONArray(jsonAllPassenger);
             int index = jsonArray.length();
             Log.d(tag, "jsonArray.length ==> " + index);
-            String[] valueColumn1Strings1 = new String[jsonArray.length()];
+            final String[] valueColumn1Strings1 = new String[jsonArray.length()];
             Log.d(tag, "value1.lentth ==> " + valueColumn1Strings1.length);
 
             String[] valueColumn1Strings2 = new String[jsonArray.length()];
@@ -109,6 +112,20 @@ public class ReportPureJobFragment extends Fragment {
                     valueColumn1Strings4, valueColumn1Strings5,
                     valueColumn1Strings6, valueColumn1Strings7);
             listView.setAdapter(reportPureJobAdapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Intent intent = new Intent(getActivity(), ShowDetailOrderActivity.class);
+
+                    Log.d("30JuneV2", "You Click id ==> " + valueColumn1Strings1[i]);
+                    intent.putExtra("idUser", valueColumn1Strings1[i]);
+
+                    startActivity(intent);
+
+                }
+            });
 
 
         } catch (Exception e) {

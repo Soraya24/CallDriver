@@ -21,6 +21,7 @@
     <string name="report_pure_Job">Report Pure Job</string>
     <string name="report_job">Report Job</string>
     <string name="edit_job">Edit Job</string>
+    <string name="title_activity_show_detail_order">Map</string>
 
 
 </resources>

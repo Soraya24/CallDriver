@@ -42,7 +42,10 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".SearchLocationActivity" />
-        <activity android:name=".FirstActivity"></activity>
+        <activity android:name=".FirstActivity" />
+        <activity
+            android:name=".ShowDetailOrderActivity"
+            android:label="@string/title_activity_show_detail_order"></activity>
     </application>
 
 </manifest>
