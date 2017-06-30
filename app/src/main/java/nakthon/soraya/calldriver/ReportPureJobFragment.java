@@ -130,7 +130,7 @@ public class ReportPureJobFragment extends Fragment {
         Log.d(tag, "result ที่ตัด [] ออกแล้่ว ==> " + result);
 
         String[] strings = result.split(",");
-        for (int i=0;i<strings.length;i+=1) {
+        for (int i = 0; i < strings.length; i += 1) {
             Log.d(tag, "strings[" + i + "] ==> " + strings[i]);
         }
         result = strings[strings.length - 1];
@@ -164,7 +164,6 @@ public class ReportPureJobFragment extends Fragment {
             Log.d(tag, "e findLastLocation ==> " + e.toString());
             return null;
         }
-
 
 
     }
