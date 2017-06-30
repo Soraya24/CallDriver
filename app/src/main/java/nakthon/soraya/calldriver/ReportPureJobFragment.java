@@ -80,7 +80,7 @@ public class ReportPureJobFragment extends Fragment {
             JSONArray jsonArray = new JSONArray(jsonAllPassenger);
             int index = jsonArray.length();
             Log.d(tag, "jsonArray.length ==> " + index);
-            String[] valueColumn1Strings1 = new String[jsonArray.length()];
+            final String[] valueColumn1Strings1 = new String[jsonArray.length()];
             Log.d(tag, "value1.lentth ==> " + valueColumn1Strings1.length);
 
             String[] valueColumn1Strings2 = new String[jsonArray.length()];
@@ -119,6 +119,10 @@ public class ReportPureJobFragment extends Fragment {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                     Intent intent = new Intent(getActivity(), ShowDetailOrderActivity.class);
+
+                    Log.d("30JuneV2", "You Click id ==> " + valueColumn1Strings1[i]);
+                    intent.putExtra("idUser", valueColumn1Strings1[i]);
+
                     startActivity(intent);
 
                 }
