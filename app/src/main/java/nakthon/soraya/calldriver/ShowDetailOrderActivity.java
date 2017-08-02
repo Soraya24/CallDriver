@@ -72,6 +72,7 @@ public class ShowDetailOrderActivity extends FragmentActivity implements OnMapRe
         MyConstant myConstant = new MyConstant();
         String tag = "30JuneV3";
 
+
         try {
 
             GetDataWhere getDataWhere = new GetDataWhere(ShowDetailOrderActivity.this);
