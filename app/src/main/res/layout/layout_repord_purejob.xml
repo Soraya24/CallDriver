@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--Headding-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
 
     </LinearLayout>
 
+    <!--Content-->
     <ListView
         android:id="@+id/livPureJob"
         android:layout_width="match_parent"

@@ -44,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ImageView startImageView, destinationImageView,
             dateImageView, timeImageView;
     private String tag = "20AprilV1", distanceString,
-            dateString, timeString, remarkString;
+            dateString, timeString, remarkString, destinationIDString;
     private String[] resultStrings;
     private LatLng centerLatLng, startLatLng, destinationLatLng;
     private double startLatADouble = 0, startLngADouble = 0,
@@ -208,15 +208,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void uploadJobToServer() {
 
         String tag = "21AprilV3";
+        String strTimeWork = dateString + " " + timeString;
+
         Log.d(tag, "ID_passenger ==> " + passengerStrings[0]);
-        Log.d(tag, "Date ==> " + dateString);
-        Log.d(tag, "Time ==> " + timeString);
-        Log.d(tag, "NameStart ==> " + startTextView.getText());
+        Log.d(tag, "TimeWork ==> " + strTimeWork);
         Log.d(tag, "NameLat ==> " + startLatADouble);
         Log.d(tag, "NameLng ==> " + startLngADouble);
-        Log.d(tag, "Destination ==> " + destinationTextView.getText());
-        Log.d(tag, "DestinationLat ==> " + destinationLatADouble);
-        Log.d(tag, "DestinationLng ==> " + destinationLngADouble);
+        Log.d(tag, "Destination ID ==> " + destinationIDString);
+
+
+        try {
+
+            MyConstant myConstant = new MyConstant();
+            AddPureJob addPureJob = new AddPureJob(MapsActivity.this);
+            addPureJob.execute(passengerStrings[0],
+                    strTimeWork,
+                    Double.toString(startLatADouble),
+                    Double.toString(startLngADouble),
+                    destinationIDString,
+                    myConstant.getUrlAddPureJob());
+
+            String result = addPureJob.get();
+            Log.d(tag, "Result ==> " + result);
+
+            if (Boolean.parseBoolean(result)) {
+                finish();
+            } else {
+                MyAlert myAlert = new MyAlert(this);
+                myAlert.generalDialog(R.mipmap.ic_marker_start, "Cannot Save", "Error Cannot Save Value to Server");
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }   // uploadJob
 
@@ -307,6 +334,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 break;
             case 1001:
 
+                destinationIDString = addArrayList(resultStrings[0]);
                 destinationTextView.setText(resultStrings[1]);
                 destinationLatADouble = Double.parseDouble(resultStrings[2]);
                 destinationLngADouble = Double.parseDouble(resultStrings[3]);
@@ -321,6 +349,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }   // showTextAnMarker
+
+    private String addArrayList(String destinationID) {
+
+        String result = null;
+
+        ArrayList<String> stringArrayList = new ArrayList<String>();
+        stringArrayList.add(destinationID);
+        result = stringArrayList.toString();
+
+        return result;
+    }
 
     public void requestDirection() {
 
