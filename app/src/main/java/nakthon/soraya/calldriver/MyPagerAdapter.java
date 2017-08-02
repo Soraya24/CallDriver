@@ -4,6 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import nakthon.soraya.calldriver.fragment.EdtiJobFragment;
+import nakthon.soraya.calldriver.fragment.ReportJobTableFragment;
+import nakthon.soraya.calldriver.fragment.ReportPureJobFragment;
+import nakthon.soraya.calldriver.fragment.SearchViewFragment;
+
 /**
  * Created by masterUNG on 6/26/2017 AD.
  */

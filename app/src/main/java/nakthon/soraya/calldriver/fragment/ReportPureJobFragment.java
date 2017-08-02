@@ -1,4 +1,4 @@
-package nakthon.soraya.calldriver;
+package nakthon.soraya.calldriver.fragment;
 
 import android.content.Intent;
 import android.location.Address;
@@ -20,6 +20,13 @@ import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Locale;
+
+import nakthon.soraya.calldriver.GetAllData;
+import nakthon.soraya.calldriver.GetDataWhere;
+import nakthon.soraya.calldriver.MyConstant;
+import nakthon.soraya.calldriver.R;
+import nakthon.soraya.calldriver.ReportPureJobAdapter;
+import nakthon.soraya.calldriver.ShowDetailOrderActivity;
 
 /**
  * Created by masterUNG on 6/26/2017 AD.

@@ -17,16 +17,17 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
+//        Create ToolBar
+        createToolBar();
 
-        tabLayout = (TabLayout) findViewById(R.id.my_tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.search_phone));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.report_pure_Job));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.report_job));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.edit_job));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        Create ViewPager
+        createViewPager();
 
+
+
+    }   // Main Method
+
+    private void createViewPager() {
         viewPager = (ViewPager) findViewById(R.id.my_viewpaper);
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),
                 tabLayout.getTabCount());
@@ -48,8 +49,17 @@ public class FirstActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void createToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
 
-
-    }   // Main Method
+        tabLayout = (TabLayout) findViewById(R.id.my_tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.search_phone));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.report_pure_Job));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.report_job));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.edit_job));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
 }   // Main Class
