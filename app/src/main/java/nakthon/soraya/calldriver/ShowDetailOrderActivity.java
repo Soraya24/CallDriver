@@ -15,6 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import nakthon.soraya.calldriver.fragment.ShowDetailOrderFragment;
 
 public class ShowDetailOrderActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -69,8 +71,18 @@ public class ShowDetailOrderActivity extends FragmentActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+
+        //Get Data From JSon
+        getDataFromJSon();
+
+
+
+    }   // onMapReady
+
+    private void getDataFromJSon() {
         MyConstant myConstant = new MyConstant();
         String tag = "30JuneV3";
+        ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
 
 
         try {
@@ -85,6 +97,18 @@ public class ShowDetailOrderActivity extends FragmentActivity implements OnMapRe
 
             latStartString = jsonObject.getString("LatStart");
             lngStartString = jsonObject.getString("LngStart");
+            latLngArrayList.add(new LatLng(Double.parseDouble(latStartString), Double.parseDouble(lngStartString)));
+
+            String strDestination = jsonObject.getString("Job");
+            strDestination = strDestination.substring(1, strDestination.length());
+            strDestination = strDestination.substring(0, strDestination.length() - 1);
+            Log.d(tag, "strDestination ==> " + strDestination);
+
+            String[] desinationStrings = strDestination.split(",");
+            for (int i=0;i<desinationStrings.length;i++) {
+                Log.d(tag, "desinationStings[" + i + "] ==> " + desinationStrings[i]);
+
+            }
 
             LatLng latLng = new LatLng(Double.parseDouble(latStartString),
                     Double.parseDouble(lngStartString));
@@ -95,10 +119,7 @@ public class ShowDetailOrderActivity extends FragmentActivity implements OnMapRe
         } catch (Exception e) {
             Log.d(tag, "e onMapReady ==> " + e.toString());
         }
-
-
-
-    }   // onMapReady
+    }
 
     private void createMarker(LatLng latLng, int intMarker) {
 
